@@ -1,12 +1,22 @@
+<<<<<<< HEAD
+=======
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+import org.junit.Assert;
+>>>>>>> aff71e1 (İnitial Commit)
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+<<<<<<< HEAD
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+=======
+>>>>>>> aff71e1 (İnitial Commit)
 
 public class GittiGidiyorTest {
     WebDriver driver;

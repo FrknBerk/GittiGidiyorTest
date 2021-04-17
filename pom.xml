@@ -5,13 +5,21 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
+<<<<<<< HEAD
     <artifactId>TestGittiGidiyor</artifactId>
+=======
+    <artifactId>GittiGidiyorTest</artifactId>
+>>>>>>> aff71e1 (İnitial Commit)
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>16</maven.compiler.source>
         <maven.compiler.target>16</maven.compiler.target>
     </properties>
+<<<<<<< HEAD
+=======
+
+>>>>>>> aff71e1 (İnitial Commit)
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -42,4 +50,8 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+<<<<<<< HEAD
+=======
+
+>>>>>>> aff71e1 (İnitial Commit)
 </project>

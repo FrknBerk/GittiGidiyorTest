@@ -6,7 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+<<<<<<< HEAD
         <module name="TestGittiGidiyor" />
+=======
+        <module name="GittiGidiyorTest" />
+>>>>>>> aff71e1 (İnitial Commit)
       </profile>
     </annotationProcessing>
   </component>
