@@ -40,7 +40,7 @@ public class GittiGidiyorTest {
         else{
             System.out.println("Sayfa yüklenmedi");
         }
-        LoginClick();
+        //LoginClick();
         Search();
         //PictureClick();
         GizlilikSözClick();
@@ -134,6 +134,31 @@ public class GittiGidiyorTest {
             System.out.println("Sepetinizi kontrol ediniz");
         }
     }
+    public void PageScrollDown(){
+        //Sayfada aşağı doğru inme
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        WebElement pageNumber=driver.findElement(By.xpath("//a[@class='current' and contains(text(),'1')]"));
+        js.executeScript("arguments[0].scrollIntoView();",pageNumber);
+    }
+
+    public void PageTwoClick(){
+        //2 numaralı sayfaya yönlendirme
+        WebElement pageNumberTwoClick = driver.findElement(By.xpath("//a[contains(text(),'2')]"));
+        pageNumberTwoClick.click();
+    }
+
+    public void CartProductPiece(){
+        //-------------------SEPETTEKİ ÜRÜN sayısı
+        WebElement checkCartPiece = driver.findElement(By.xpath("//p[@class='product-specs-quantity' and contains(text(),'2')]"));
+        Assert.assertEquals(checkCartPiece.isEnabled(),true);
+        if (checkCartPiece.isEnabled() == true){
+            System.out.println("Sepetteki ürün adedi 2 tanedir");
+        }
+        else{
+            System.out.println("Ürün sayısı eksik");
+        }
+    }
+
     public void PageScrollDown(){
         //Sayfada aşağı doğru inme
         JavascriptExecutor js = (JavascriptExecutor) driver;
