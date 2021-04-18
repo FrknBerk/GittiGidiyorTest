@@ -1,3 +1,4 @@
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -10,6 +11,9 @@ import org.openqa.selenium.interactions.Actions;
 
 public class GittiGidiyorTest {
     WebDriver driver;
+    String UserName ="Your Name";
+    String Password="Your Password";
+    String search ="Bilgisayar";
 
     @BeforeClass
     void Setup(){
@@ -40,8 +44,16 @@ public class GittiGidiyorTest {
         Search();
         //PictureClick();
         GizlilikSözClick();
+        PageScrollDown();
+        PageTwoClick();
+        Thread.sleep(2000);
         AddCart();
         CheckCartPrice();
+        Thread.sleep(2000);
+        AddCart();
+        Thread.sleep(2000);
+        CartProductPiece();
+        Thread.sleep(1000);
 
     }
     public void LoginClick() throws InterruptedException {
@@ -56,8 +68,8 @@ public class GittiGidiyorTest {
         Actions clickAct = new Actions(driver);
         clickAct.moveToElement(click).click().build().perform();
 
-        driver.findElement(By.id("L-UserNameField")).sendKeys("furkanbrkakdas");
-        driver.findElement(By.id("L-PasswordField")).sendKeys("frkn1234");
+        driver.findElement(By.id("L-UserNameField")).sendKeys(UserName);
+        driver.findElement(By.id("L-PasswordField")).sendKeys(Password);
 
         driver.findElement(By.xpath("//input[@id='gg-login-enter']")).click();
 
@@ -77,7 +89,6 @@ public class GittiGidiyorTest {
     public void Search() throws InterruptedException {
         // -------------SEARCH-------------------------
         driver.findElement(By.xpath("//input[@class='sc-4995aq-0 sc-14oyvky-0 itMXHg']")).click();
-        String search ="Bilgisayar";
         driver.findElement(By.xpath("//input[@class='sc-4995aq-0 sc-14oyvky-0 itMXHg']")).sendKeys(search);
         driver.findElement(By.xpath("//button[@class='qjixn8-0 sc-1bydi5r-0 hKfdXF']")).click();
         Thread.sleep(2000);
@@ -99,7 +110,7 @@ public class GittiGidiyorTest {
         //Thread.sleep(1000);
 
 
-        WebElement clickCart = driver.findElement(By.xpath("//button[@class='gg-ui-button gg-ui-btn-primary' and @product-id='630946783']"));
+        WebElement clickCart = driver.findElement(By.xpath("(//button[@class='gg-ui-button gg-ui-btn-primary'])[1]"));
         Actions clickCartAct = new Actions(driver);
         clickCartAct.moveToElement(clickCart).click().build().perform();
 
@@ -121,6 +132,30 @@ public class GittiGidiyorTest {
         }
         else{
             System.out.println("Sepetinizi kontrol ediniz");
+        }
+    }
+    public void PageScrollDown(){
+        //Sayfada aşağı doğru inme
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        WebElement pageNumber=driver.findElement(By.xpath("//a[@class='current' and contains(text(),'1')]"));
+        js.executeScript("arguments[0].scrollIntoView();",pageNumber);
+    }
+
+    public void PageTwoClick(){
+        //2 numaralı sayfaya yönlendirme
+        WebElement pageNumberTwoClick = driver.findElement(By.xpath("//a[contains(text(),'2')]"));
+        pageNumberTwoClick.click();
+    }
+
+    public void CartProductPiece(){
+        //-------------------SEPETTEKİ ÜRÜN sayısı
+        WebElement checkCartPiece = driver.findElement(By.xpath("//p[@class='product-specs-quantity' and contains(text(),'2')]"));
+        Assert.assertEquals(checkCartPiece.isEnabled(),true);
+        if (checkCartPiece.isEnabled() == true){
+            System.out.println("Sepetteki ürün adedi 2 tanedir");
+        }
+        else{
+            System.out.println("Ürün sayısı eksik");
         }
     }
 
