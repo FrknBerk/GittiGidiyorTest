@@ -26,8 +26,6 @@ public class GittiGidiyorTest {
         driver.close();
     }
 
-
-
     @Test
     void GittiGidiyor() throws InterruptedException {
         boolean pageLoad = driver.findElement(By.xpath("//a[contains(@href, 'gittigidiyor')]")).isEnabled();
