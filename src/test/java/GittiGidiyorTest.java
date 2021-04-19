@@ -35,6 +35,7 @@ public class GittiGidiyorTest {
         boolean pageLoad = driver.findElement(By.xpath("//a[contains(@href, 'gittigidiyor')]")).isEnabled();
         Assert.assertEquals(pageLoad,true);
         if (pageLoad == true){
+            Log4j.info("Sayfa Yüklendi");
             System.out.println("Sayfa Yüklendi");
         }
         else{
@@ -42,10 +43,12 @@ public class GittiGidiyorTest {
         }
         //LoginClick();
         Search();
-        //PictureClick();
+        PictureClick();
         GizlilikSözClick();
         PageScrollDown();
         PageTwoClick();
+        Thread.sleep(2000);
+        CheckPageNumber();
         Thread.sleep(2000);
         AddCart();
         CheckCartPrice();
@@ -53,7 +56,10 @@ public class GittiGidiyorTest {
         AddCart();
         Thread.sleep(2000);
         CartProductPiece();
-        Thread.sleep(1000);
+        MouseHoverCart();
+        CartProductDelete();
+        MouseHoverCart();
+        CheckCartEmpty();
 
     }
     public void LoginClick() throws InterruptedException {
@@ -80,6 +86,7 @@ public class GittiGidiyorTest {
         Assert.assertEquals(loginControl,true);
         System.out.println(loginControl);
         if (loginControl == true){
+            Log4j.info("Giriş Başarılı");
             System.out.println("Giriş başarılı");
         }
         else{
@@ -128,36 +135,13 @@ public class GittiGidiyorTest {
         //ÜRÜN İLE SEPETTEKİ FİYATI KARŞILAŞTIRIYORUZ
         Thread.sleep(2000);
         if(cartPriceControl.equals(price)){
+            Log4j.info("Sepetteki ürün fiyatı ile aldığını ürün fiyatı aynı başarılı bir şekilde alışveriş yapabilirsiniz.");
             System.out.println("Sepetteki ürün fiyatı ile aldığını ürün fiyatı aynı başarılı bir şekilde alışveriş yapabilirsiniz.");
         }
         else{
             System.out.println("Sepetinizi kontrol ediniz");
         }
     }
-    public void PageScrollDown(){
-        //Sayfada aşağı doğru inme
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        WebElement pageNumber=driver.findElement(By.xpath("//a[@class='current' and contains(text(),'1')]"));
-        js.executeScript("arguments[0].scrollIntoView();",pageNumber);
-    }
-
-    public void PageTwoClick(){
-        //2 numaralı sayfaya yönlendirme
-        WebElement pageNumberTwoClick = driver.findElement(By.xpath("//a[contains(text(),'2')]"));
-        pageNumberTwoClick.click();
-    }
-
-    public void CartProductPiece(){
-        //-------------------SEPETTEKİ ÜRÜN sayısı
-        WebElement checkCartPiece = driver.findElement(By.xpath("//p[@class='product-specs-quantity' and contains(text(),'2')]"));
-        Assert.assertEquals(checkCartPiece.isEnabled(),true);
-        if (checkCartPiece.isEnabled() == true){
-            System.out.println("Sepetteki ürün adedi 2 tanedir");
-        }
-        else{
-            System.out.println("Ürün sayısı eksik");
-        }
-    }
 
     public void PageScrollDown(){
         //Sayfada aşağı doğru inme
@@ -172,15 +156,55 @@ public class GittiGidiyorTest {
         pageNumberTwoClick.click();
     }
 
+    public void CheckPageNumber(){
+        //Sayfa sayısı kontrol
+        WebElement checkPageNumber = driver.findElement(By.xpath("//a[@class='current' and contains(text(),'2')]"));
+        Assert.assertEquals(checkPageNumber.isEnabled(),true);
+        if (checkPageNumber.isEnabled() == true){
+            Log4j.info("2.Numaralı sayfadasınız");
+            System.out.println("2.Numaralı sayfadasınız");
+        }
+        else {
+            System.out.println("Sayfa sayınız yanlış");
+        }
+    }
+
     public void CartProductPiece(){
         //-------------------SEPETTEKİ ÜRÜN sayısı
         WebElement checkCartPiece = driver.findElement(By.xpath("//p[@class='product-specs-quantity' and contains(text(),'2')]"));
         Assert.assertEquals(checkCartPiece.isEnabled(),true);
         if (checkCartPiece.isEnabled() == true){
+            Log4j.info("Sepetteki ürün adedi 2 tanedir");
             System.out.println("Sepetteki ürün adedi 2 tanedir");
         }
         else{
             System.out.println("Ürün sayısı eksik");
+        }
+    }
+
+    public void MouseHoverCart(){
+        //Fare ile Sepete Üstüne Gelme
+        WebElement mouseHoverCart=driver.findElement(By.xpath("//a[@class='dIB']"));
+        Actions mouseAct = new Actions(driver);
+        mouseAct.moveToElement(mouseHoverCart).perform();
+    }
+
+    public void CartProductDelete(){
+        //Sepetteki Ürünü Silme
+        WebElement cartDelete =driver.findElement(By.xpath("//a[@href='javascript:;']"));
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();",cartDelete);
+    }
+
+    public void CheckCartEmpty(){
+        WebElement checkCartControl = driver.findElement(By.xpath("//p[contains(text(),'Sepetinizde ürün bulunmamaktadır.')]"));
+        Assert.assertEquals(checkCartControl.isEnabled(),true);
+        if (checkCartControl.isEnabled() == true){
+            Log4j.info("Sepette ürün yok");
+            System.out.println("Sepette Ürün Yok");
+        }
+        else{
+            System.out.println("Sepette Ürün Bulunmaktadır");
         }
     }
 
