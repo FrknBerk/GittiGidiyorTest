@@ -1,5 +1,6 @@
 # GittiGidiyorTest
-
+- Proje Java programlama dilinde yazılmalıdır.
+- Proje Maven projesi olarak yazılmalıdır.
 - Selenium ve Log4J kütüphanelerini kullanmanız gerekmektedir.
 
 - [x] www.gittigidiyor.com sitesi açılır.
