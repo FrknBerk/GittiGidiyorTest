@@ -1,7 +1,7 @@
 # GittiGidiyorTest
 
 - Selenium ve Log4J kütüphanelerini kullanmanız gerekmektedir.
-- 
+
 - [x] www.gittigidiyor.com sitesi açılır.
 - [x] Ana sayfanın açıldığı kontrol edilir. Siteye login olunur
 - [x] Login işlemi kontrol edilir.
