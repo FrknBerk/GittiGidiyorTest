@@ -1,15 +1,17 @@
+package log;
+
 import org.apache.log4j.Logger;
 
 public class Log4j {
     private static Logger Log = Logger.getLogger(Log4j.class.getName());
 
     public static void startLog (String testClassName){
-        Log.info("Test is Starting...");
+        Log.info("Test başladı");
     }
 
 
     public static void endLog (String testClassName){
-        Log.info("Test is Ending...");
+        Log.info("Test sonlandı");
     }
 
     //Info Level
