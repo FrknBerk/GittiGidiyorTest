@@ -2,6 +2,8 @@
 - Proje Java programlama dilinde yazılmalıdır.
 - Proje Maven projesi olarak yazılmalıdır.
 - Selenium, JUnit ve Log4J kütüphanelerini kullanmanız gerekmektedir.
+- OOP (Object Oriented Programming) prensiplerine uygun yazılması gerekmektedir.
+- Page Object Pattern kullanmanız gerekmektedir.
 
 - [x] www.gittigidiyor.com sitesi açılır.
 - [x] Ana sayfanın açıldığı kontrol edilir. Siteye login olunur
