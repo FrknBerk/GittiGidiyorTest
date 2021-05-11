@@ -12,14 +12,14 @@ public class GittiGidiyorTest extends Base {
         HomePage homePage = new HomePage(driver);
         homePage.pageLoadAssert();
 
-        /*LoginPage loginPage = new LoginPage(driver);
-        loginPage.LoginButton();*/
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.LoginButton();
 
         HomePageSearch homePageSearch = new HomePageSearch(driver);
         homePageSearch.search(search);
 
         HomePageImage homePageImage = new HomePageImage(driver);
-        //homePageImage.imageClick();
+        homePageImage.imageClick();
 
         HomePageConfidentiality homePageConfidentiality = new HomePageConfidentiality(driver);
         homePageConfidentiality.confidentialityAgreementClick();
