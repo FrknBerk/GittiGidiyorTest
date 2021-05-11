@@ -1,56 +1,57 @@
-import log.Log4j;
+
+import base.Base;
 import org.junit.Test;
-import org.openqa.selenium.JavascriptExecutor;
-import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import page.HomePage;
-import page.LoginPage;
+import page.*;
 
-public class GittiGidiyorTest {
-    WebDriver driver;
-
-
-
+public class GittiGidiyorTest extends Base {
     @Test
-    void GittiGidiyor() throws InterruptedException {
-        boolean pageLoad = driver.findElement(By.xpath("//a[contains(@href, 'gittigidiyor')]")).isEnabled();
-        Assert.assertEquals(pageLoad,true);
-        if (pageLoad == true){
-            Log4j.info("Sayfa Yüklendi");
-            System.out.println("Sayfa Yüklendi");
-        }
-        else{
-            System.out.println("Sayfa yüklenmedi");
-        }
-        String search = "Bilgisayar";
+    public void GittiGidiyor() throws InterruptedException {
+        String search ="Bilgisayar";
 
-        HomePage page = new HomePage(driver);
-        page.pageLoad();
+        HomePage homePage = new HomePage(driver);
+        homePage.pageLoadAssert();
 
-        Thread.sleep(1000);
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.LoginButton();
-        page.Search(search);
-        Thread.sleep(2000);
-        page.imageClick();
-        page.confidentialityAgreementClick();
-        page.pageScrollDown();
-        page.pageTwoClick();
-        page.checkPageNumber();
-        page.addCart();
-        page.checkCartPrice();
-        Thread.sleep(2000);
-        page.addCart();
-        page.cartProductPiece();
-        page.mouseHoverCart();;
-        page.cartProductDelete();
-        page.mouseHoverCart();
-        page.checkCartEmpty();
+        /*LoginPage loginPage = new LoginPage(driver);
+        loginPage.LoginButton();*/
 
+        HomePageSearch homePageSearch = new HomePageSearch(driver);
+        homePageSearch.search(search);
+
+        HomePageImage homePageImage = new HomePageImage(driver);
+        //homePageImage.imageClick();
+
+        HomePageConfidentiality homePageConfidentiality = new HomePageConfidentiality(driver);
+        homePageConfidentiality.confidentialityAgreementClick();
+
+        HomePageScroll pageScroll = new HomePageScroll(driver);
+        pageScroll.pageScrollDown();
+
+        HomePageTwo pageTwo = new HomePageTwo(driver);
+        pageTwo.pageTwoClick();
+
+        homePage.checkPageNumberTwo();
+
+        HomePageAddCart pageAddCart = new HomePageAddCart(driver);
+        pageAddCart.addCart();
+        pageAddCart.cartClick();
+
+        HomePageCartPrice homePageCartPrice = new HomePageCartPrice(driver);
+        homePageCartPrice.checkCartPrice();
+
+        //Add cart two product
+        pageAddCart.addCart();
+        pageAddCart.cartClick();
+
+        homePage.cartProductPiece();
+        homePage.hoverCartMouse();
+
+        HomePageCartDelete homePageCartDelete = new HomePageCartDelete(driver);
+        homePageCartDelete.cartProductDelete();
+
+        homePage.hoverCartMouse();
+        HomePageCartEmpty homePageCartEmpty = new HomePageCartEmpty(driver);
+        homePageCartEmpty.checkCartEmpty();
     }
 
 }

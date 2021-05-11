@@ -9,13 +9,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Base {
     protected WebDriver driver;
-    protected WebDriverWait wait;
 
     @Before
     public void setup(){
         setProperty();
         driver = new ChromeDriver();
-        wait = new WebDriverWait(driver,20);
         driver.get("https://www.gittigidiyor.com/");
         Log4j.startLog("GittiGidiyorTest");
         driver.manage().window().maximize();
